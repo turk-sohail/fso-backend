@@ -72,17 +72,17 @@ app.use(notFound);
 /***********error-handler*************/
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
-const startApplication = async () => {
+const start = async () => {
   try {
-    await connectDB();
-    console.log("database Connection successfull");
-    app.listen(PORT, () => {
-      console.log(`server is running on port ${PORT}`);
-    });
+    // connectDB
+    await connectDB(process.env.MONGO_URI);
+    console.log("database connected successfully");
+    app.listen(port, () => console.log(`Server is listening port ${port}...`));
   } catch (error) {
-    console.log("error");
+    console.log(error);
   }
 };
-startApplication();
+
+start();
