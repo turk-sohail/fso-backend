@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 app.get("/api/v1/notes", async (req, res, next) => {
   try {
     const notes = await Note.find({});
-    return res.status(200).json({ data: notes });
+    return res.status(200).json(notes);
   } catch (error) {
     next(error);
   }
@@ -32,7 +32,7 @@ app.post("/api/v1/notes", async (req, res, next) => {
     };
     const note = new Note(noteObject);
     await note.save();
-    res.status(200).json({ data: note });
+    res.status(200).json(note);
   } catch (error) {
     next(error);
   }
@@ -59,7 +59,7 @@ app.put("/api/v1/notes/:id", async (req, res, next) => {
       new: true,
       runValidators: true,
     });
-    res.status(201).json({ data: note });
+    res.status(201).json(note);
   } catch (error) {
     next(error);
   }
